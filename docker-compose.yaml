@@ -1,0 +1,15 @@
+services:
+  rcon-exporter:
+    build: .
+    restart: unless-stopped
+    # host network: RCON is reached via the host's 127.0.0.1, so port 25575 can
+    # stay closed to the outside, and the exporter binds only where set below.
+    network_mode: host
+    environment:
+      MINECRAFT_RCON_PASSWORD: ${MINECRAFT_RCON_PASSWORD:?set MINECRAFT_RCON_PASSWORD in .env}
+    command:
+      - --rcon.address=${RCON_ADDRESS:-127.0.0.1:25575}
+      - --web.listen-address=${WEB_LISTEN_ADDRESS:-127.0.0.1:9940}
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
