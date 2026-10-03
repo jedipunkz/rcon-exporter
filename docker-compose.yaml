@@ -6,7 +6,7 @@ services:
     # stay closed to the outside, and the exporter binds only where set below.
     network_mode: host
     environment:
-      MINECRAFT_RCON_PASSWORD: ${MINECRAFT_RCON_PASSWORD:?set MINECRAFT_RCON_PASSWORD in .env}
+      MINECRAFT_RCON_PASSWORD: ${RCON_PASSWORD:?set RCON_PASSWORD in .env}
     command:
       - --rcon.address=${RCON_ADDRESS:-127.0.0.1:25575}
       - --web.listen-address=${WEB_LISTEN_ADDRESS:-127.0.0.1:9940}
