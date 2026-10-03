@@ -12,4 +12,5 @@ services:
       - --web.listen-address=${WEB_LISTEN_ADDRESS:-127.0.0.1:9940}
     read_only: true
     cap_drop: [ALL]
-    security_opt: [no-new-privileges:true]
+    # no-new-privileges is omitted: under snap Docker, AppArmor denies exec with
+    # it set ("exec /rcon-exporter: operation not permitted").
